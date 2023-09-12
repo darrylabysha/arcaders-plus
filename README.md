@@ -19,7 +19,7 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
 
 B. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
-    ![Bagan MVT](Bagan MVT Django.png)
+![Bagan MVT](<Bagan MVT Django-1.png>)
 
     1. Pertama-tama, routing akan terjadi sesuai dengan route yang terkonfigurasi pada urls.py.
     2. File view.py akan menampilkan tampilan yang sudah disesuaikan dengan atribut-atribut yang ada pada file models.py.
