@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <style>
+        .tombol{
+        background: -webkit-radial-gradient(center, 15em 100px, #6dabf7, WHITE); 
+        text-align:center-right;
+        border:none;
+        border-radius:20px;
+        box-shadow:  2px 2px 4px 10px #6dabf7; 
+        height: 50px; 
+        margin: 20px; 
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .tombol:hover
+        {box-shadow: 2px 2px 8px 12px #004c9e;}
+
+        .hub{color:white;
+        text-decoration:none;
+        font-family:montserrat;
+        font-weight:bold;}
+
+        .hub:hover{color:#004c9e;}
+        
+        .container {
+        height: 100px;
+        position: relative;
+        }
+
+        .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        }
+
+        .header-isi {
+        background: -webkit-radial-gradient(center, 15em 100px);
+        text-align:center;
+        border:none;
+        border-radius:50px;
+        font-size:40px;
+        background-color:#3286ed;
+        margin: 10px;
+        height: 120px;
+        }
+
+    </style>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        {% block meta %}
+        {% endblock meta %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>

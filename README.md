@@ -1,3 +1,68 @@
+TUGAS 3
+
+A. Apa perbedaan antara form POST dan form GET dalam Django?
+
+    - Pengiriman Data:
+    POST: Data dikirim dalam HTTP dan tidak terlihat pada URL.
+    GET: Data disertakan dalam URL.
+
+    - Kemampuan Data:
+    POST: Cocok untuk data besar atau sensitif.
+    GET: Cocok untuk mengambil data dari suatu server.
+
+    - Keamanan:
+    POST: Lebih aman karena data tidak terlihat di URL.
+    GET: Data terlihat di URL sehingga kurang aman jika melibatkan data sensitif.
+
+B. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+
+    1. XML:
+    - Struktur: Bahasa markup dengan dokumen hierarki berbasis tag.
+    - Tujuan Utama: Pertukaran data antara sistem yang berbeda.
+    - Kelebihan: Dapat digunakan untuk struktur data yang kompleks.
+    - Kekurangan: Struktur lebih rumit sehingga dokumen biasanya lebih besar.
+    
+    2. JSON:
+    - Struktur: Format pertukaran data ringan dengan struktur yang serupa dengan objek JavaScript.
+    - Tujuan Utama: Pertukaran data dalam aplikasi web.
+    - Kelebihan: Ringan, mudah dibaca dan ditulis, dan cocok untuk data semi-terstruktur.
+    - Kekurangan: Terbatas dalam jenis data khusus.
+
+    3. HTML:
+    - Struktur: Bahasa markup untuk membuat halaman web.
+    - Tujuan Utama: Membuat tampilan dan konten halaman web, diakses oleh browser.
+    - Kelebihan: Cocok untuk pembuatan antarmuka pengguna web.
+    - Kekurangan: Kurang cocok untuk pertukaran atau penyimpanan data terstruktur karena lebih fokus pada tampilan dan presentasi.
+
+C. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+
+    JSON sering digunakan dalam komunikasi data antara aplikasi web modern karena beberapa alasan yang mendasar. Pertama-tama, JSON memiliki format yang ringan dan responsif sehingga lebih efisien dalam respons permintaan data. Selain itu, JSON juga mudah dibaca dan dimengerti oleh manusia dan mesin. Lalu, JSON mendukung kemampuan untuk menyimpan data dalam bentuk array, yang mempermudah dalam proses transfer data. JSON juga efektif dalam menangani API baik untuk aplikasi web dan mobile. Terakhir, JSON bersifat independen dari bahasa pemrograman tertentu sehingga dapat digunakan dengan mudah dalam berbagai jenis aplikasi tanpa menghadapi masalah kompatibilitas.
+
+D. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step 
+
+    1. Pertama-tama, saya mereview kembali apa yang sudah saya pelajari dari tutorial 2 kemarin mengenai form dan data delivery dan akan mencoba mengimplementasikannya ke aplikasi web yang saya susun.
+    2. Lalu, saya menyalakan environment dan melakukan routing dari main/ ke / pada localhost.
+    3. Setelah itu, saya membuat file html bernama base.html yang akan digunakan sebagai base dari template html yang diextend juga oleh output-output lainnya seperti main dan juga create_product nanti. Saya juga mengubah settings dan juga layout pada main.html agar sesuai dengan penggunaan base juga. Untuk sementara ini, semua style CSS juga saya simpan disini agar dapat digunakan oleh kedua subclass.
+    4. Kemudian, saya mulai membuat form untuk input data dengan membuat file forms.py. Saya menggunakan attribute name, amount, dan description sesuai dengan apa yang sudah saya bentuk minggu lalu. Selain itu saya juga membuat file html yang bernama create-product yang nantinya akan menerima input dari user untuk membuat product baru, atau lebih tepatnya game baru di project saya. Saya juga menyesuaikan file views, urls, dan juga main untuk bisa melakukan input data menggunakan forms.
+    5. Lalu, saya membuat konfigurasi agar data yang sudah diinput pada form bisa diakses dengan XML, XML by ID, JSON, dan juga JSON by ID dengan membuat method-method yang mengembalikan HttpResponse. Dengan ini, semua data yang telah diinput juga dapat terlihat dengan jelas menggunakan web ataupun juga Postman.
+    6. Setelah itu saya membuat link-link yang dapat mengakses input dapat melalui HTML, XML, XML by ID, JSON, dan juga JSON by ID lalu mencoba membukanya di Postman dan ternyata bisa.
+    7. Lalu, saya menambahkan fungsi pada menu untuk menghitung berapa items yang berada pada stock products.
+    7. Terakhir, saya mencoba mendesign juga webnya sedikit menggunakan apa yang sudah saya pelajari saat SMA namun belum terlalu bagus dan banyak yang masih perlu saya review lagi.
+
+Berikut adalah screenshot fungsi views yang dibuat:
+HTML:
+![Show HTML](<Screenshot 2023-09-20 004018.png>)
+JSON:
+![Show JSON](<Screenshot 2023-09-20 004036.png>)
+JSON by ID:
+![Show JSON by ID](<Screenshot 2023-09-20 004056.png>)
+XML:
+![Show XML](<Screenshot 2023-09-20 004113.png>)
+XML by ID:
+![Show XML by ID](<Screenshot 2023-09-20 004127.png>)
+
+TUGAS 2
+
 Link Adaptable:
 https://arcaders-plus.adaptable.app
 
