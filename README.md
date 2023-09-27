@@ -1,3 +1,27 @@
+TUGAS 4
+
+ A. Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+    Django UserCreationForm adalah suatu fungsi forms bawaan/package yang tersedia dari Django yang dapat memfasilitasi programmer untuk membuat login dan register page yang mudah untuk digunakan oleh user, agar proses autentikasi dapat berjalan dengan mudah. Beberapa kelebihan dari UserCreationForm adalah terdapat validasi yang sudah termasuk dalam package tersebut sehingga dapat mengurangi potensi kurangnya keamanan, dan juga relatif mudah digunakan karena banyak logika dan validasi sudah diimplementasikan sehingga pembuat web tinggal menggunakannya dalam program Django yang dibuat. Namun, beberapa kelemahan yang mungkin dimiliki adalah template dan tampilan yang cukup standar dan simpel sehingga perlu banyak kustomisasi desain oleh pembuat web, dan juga perlu mengimplementasi sendiri jika ingin menambahkan fungsi-fungsi lain yang tidak dicakup oleh UserCreationForm.
+
+ B. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+    Autentikasi adalah dimana sistem memverifikasi atau mengenali seorang user yang sedang melakukan aksi login. Pentingnya autentikasi adalah untuk memastikan bahwa hanya user yang sudah login dan berada dalam database yang dapat mengakses suatu sistem. Sedangkan, otorisasi adalah suatu proses dimana seorang user perlu mengakses sesuatu dengan melihat apa saja yang dapat diakses dan seberapa luas akses seorang user tersebut. Otorisasi penting untuk menjaga privasi dan keamanan data, serta untuk mengontrol tindakan yang dapat diambil oleh user.
+
+ C. Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+    Cookies merupakan data/informasi kecil yang dikirim oleh server web ke browser dan kemudian dikirim kembali oleh browser pada permintaan halaman. Cookies digunakan dalam proses autentikasi, pelacakan pengguna, dan menjaga preferensi pengguna. Data dalam cookie terdiri dari satu pasangan nama/nilai yang dikirim dalam header permintaan HTTP GET atau POST dari klien. Django menggunakannya untuk mengelola data sesi pengguna dengan menyimpan informasi seperti ID sesi atau token autentikasi dalam suatu cookie, sehingga memungkinkan Django untuk mengidentifikasi permintaan berikutnya dari pengguna dan menjaga keadaan dari suatu session seperti status login dan preferensi.
+
+ D. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+    Sebenarnya, cookies adalah berkas data kecil yang aman secara default, dimana cookies tidak dapat menghapus data atau membaca informasi dari komputer user dan juga tidak berfungsi sebagai pengintai atau "spyware". Pada umumnya, cookies biasanya bersifat anonim dan hanya menyimpan data dan bukan kode program. Namun, tetap penting untuk user dalam menghindari penyimpanan data pribadi dalam cookies untuk menjaga privasi user sendiri.
+
+ E. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    1. Pertama-tama, saya mereview kembali apa yang sudah saya pelajari dan latih dari tutorial 3 mengenai autentikasi dan aka mengimplementasikannya ke aplikasi web saya.
+    2. Lalu saya mengaktifkan environment and mulai membuat proses autentikasi pada program web saya.
+    3. Pada awalnya, saya menambahkan webpage baru bernama login yang akan menerima nama dan password beserta button untuk melakukan fungsi login pada seorang user dengan akun dan button lain yang me-register akun baru jika belum dibuat, sekaligus saya juga merestriksi akses ke laman main jika user belum login menggunakan akun yang tersedia.
+    4. Setelah itu, saya juga membuat fungsi logout dan mengimplementasikannya ke laman main agar dapat keluar dari akun tersebut dan kembali ke login page dengan suatu button.
+    5. Kemudian, saya juga membuat agar data cookies juga dapat ditrack setiap kali dilakukan request seperti login dan logout, beserta menambahkan informasi waktu terakhir kali login.
+    6. Lalu dengan adanya laman register dan perlunya akun untuk autentikasi untuk bisa masuk ke laman main, saya juga menambahkan fungsi agar konten dari setiap user berbeda-beda seperti halnya akun-akun, dimana masing-masing user hanya dapat melihat dan mengakses item-item yang sudah dibuat oleh user tersebut.
+    7. Setelah saya membuat proses autentikasi yang lengkap dengan register, logout, dan login, saya lanjut mengedit laman main saya. Saya membuat 3 button baru dalam kolom yang baru pada tabel konten, yaitu untuk menambahkan & mengurangi jumlah item, serta untuk menghapus satu kategori item. Hal tersebut tentu akan sangat membantu kustomisasi nantinya agar user juga mudah dalam mengedit data juga.
+    8. Terakhir, saya juga mengedit semua laman yang sudah saya buat agar lebih sesuai dengan estetik desain yang saya inginkan. Karena belum terlalu diajarkan dan banyak lupa materi pembelajaran pada SMA, saya banyak mengandalkan Internet sebagai referensi apa saja setting dan efek yang dapat digunakan untuk melakukan suatu desain tertentu dan juga menggunakan ChatGPT agar mencari setting yang lebih sesuai sehingga saya dapat mendesain sesuai konsep yang saya mau sendiri.
+
 TUGAS 3
 
 A. Apa perbedaan antara form POST dan form GET dalam Django?

@@ -3,29 +3,106 @@
 <html lang="en">
 
     <style>
-        .tombol{
-        background: -webkit-radial-gradient(center, 15em 100px, #6dabf7, WHITE); 
-        text-align:center-right;
-        border:none;
-        border-radius:20px;
-        box-shadow:  2px 2px 4px 10px #6dabf7; 
-        height: 50px; 
-        margin: 20px; 
-        width: 150px;
+
+        .top-bar {
+        background-color: #4aa7f7;
+        padding: 5x 0;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 10px; 
+        }
+
+        .top-bar-left {
+        display: flex;
+        align-items: center;
+        margin-left: 30px
+        }
+
+        .top-bar-right {
+        display: flex;
+        flex-direction: column; 
+        align-items: flex-end;
+        margin-top: 5px; 
+        padding: 20px
+        }
+
+        .arcaders-text {
+        font-size: 70px; 
+        color: white;
+        font-family: montserrat;
+        }
+
+        .user-info {
+        text-align: right;
+        color: white;
+        font-family: montserrat;
+        }
+
+        .logout-btn {
+        background-color: #e74c3c; 
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family: montserrat;
+        }
+
+        .logout-btn:hover {
+        background-color: #c0392b; 
+        transition: box-shadow 0.3s;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); 
+        }
+
+        .circular-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #0a7de0;
+        color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        padding: 10px;
+        margin: 5px
         }
 
-        .tombol:hover
-        {box-shadow: 2px 2px 8px 12px #004c9e;}
+        .circular-btn:hover {
+        background-color: #357abf;
+        }
 
-        .hub{color:white;
+        .icon {
+        font-size: 20px;
+        }
+
+        .add-game-btn {
+        background-color: #0a7de0;
+        color: #fff;
+        padding: 15px 30px; 
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family: montserrat;
+        font-size: 18px; 
+        }
+
+        .add-game-btn:hover {
+        background-color: #357abf;
+        transition: box-shadow 0.3s;
+        box-shadow: 0px 0px 10px #004c9e;
+        }
+
+        .hub {
+        color:white;
         text-decoration:none;
         font-family:montserrat;
-        font-weight:bold;}
-
-        .hub:hover{color:#004c9e;}
+        font-weight:bold;
+        }
         
         .container {
         height: 100px;
@@ -40,16 +117,107 @@
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         }
+        
+        .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f7f7f7;
+        font-family:montserrat;
+        }
 
-        .header-isi {
-        background: -webkit-radial-gradient(center, 15em 100px);
-        text-align:center;
-        border:none;
-        border-radius:50px;
-        font-size:40px;
-        background-color:#3286ed;
-        margin: 10px;
-        height: 120px;
+        .login-box {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        font-family:montserrat;
+        }
+
+        .login-box h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+        font-family:montserrat;
+        }
+
+        .form-group {
+        margin-bottom: 15px;
+        font-family:montserrat;
+        text-align: left;
+        }
+
+        .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s;
+        text-align:left;
+        font-family:montserrat;
+        box-sizing: border-box;
+        }
+
+        .form-control:focus {
+        border-color: #4aa7f7; 
+        }
+
+        .login-btn {
+        background-color: #4aa7f7; 
+        color: #fff; 
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family:montserrat;
+        }
+
+        .login-btn:hover {
+        background-color: #357abf;
+        }
+
+        .error-messages {
+        list-style: none;
+        color: red;
+        margin-top: 10px;
+        font-family:montserrat;
+        }
+
+        .register-link {
+        text-align: center;
+        margin-top: 20px;
+        }
+
+        .register-btn {
+        background-color: #07579d;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s;
+        font-family:montserrat;
+        }
+
+        .register-btn:hover {
+        background-color: #2980b9;
+        }
+
+        p {
+        margin-top: 20px;
+        font-family:montserrat;
+        }
+
+        table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
         }
 
     </style>

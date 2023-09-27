@@ -1,23 +1,31 @@
 {% extends 'base.html' %}
 
+{% block meta %}
+    <title>Arcaders+</title>
+{% endblock meta %}
+
 {% block content %}
 
-<div class='header-isi'>
-<h1 style='margin-bottom:0;color:#FFFFFF;text-align:center;font-family:montserrat;'><b>Arcaders+</b></h1>
-</div> 
+<div class="top-bar">
+    <div class="top-bar-left">
+        <div class="logo">
+            <h1 class="arcaders-text">Arcaders+</h1>
+        </div>
+    </div>
+    <div class="top-bar-right">
+        <div class="user-info">
+            <p><font size='4' face='montserrat'><b>Administrator:</b></font> {{ name }}</p>
+            <p><font size='4' face='montserrat'><b>Class:</b></font> {{ class }}</p>
+        </div>
+        <div class="logout">
+            <a href="{% url 'main:logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </div>
+</div>
 
-<h3><font size='5' face='montserrat'>Administrator: </font></h3>
-<p style='background-color:rgba(74,166,247,0.5); padding:10px;' > <font size='4' color='white' face='montserrat'> {{ name }} </font><p>
-
-<h4><font size='4' face='montserrat'>Class: </font></h4>
-<p style='background-color:rgba(74,166,247,0.5); padding:10px;' > <font size='4' color='white' face='montserrat'> {{ class }} </font><p>
-
-<h4><font size='4' face='montserrat'>Student ID: </font></h4>
-<p style='background-color:rgba(74,166,247,0.5); padding:10px;' > <font size='4' color='white' face='montserrat'> {{ NPM }} </font><p>
 
 {% if products %}
     <p><font size='4' color='black' face='montserrat'>There {{ verb }} currently {{ num_products }} kind{{ pluralize }} of game{{ pluralize }} in stock.</font></p>
-{% endif %}
 
 
 <table align='center' cellpadding='10' cellspacing='10' bgcolor='#4aa7f7'>
@@ -25,6 +33,7 @@
         <th><font face='montserrat' size='4'><b>Title</b></font></th>
         <th><font face='montserrat' size='4'><b>Stock</b></font></th>
         <th><font face='montserrat' size='4'><b>Description</b></font></th>
+        <th><font face='montserrat' size='4'><b>Actions</b></font></th>
     </tr>
 
     {% for product in products %}
@@ -32,15 +41,43 @@
             <td><font face='montserrat' size='4'>{{product.name}}</font></td>
             <td><font face='montserrat' size='4'>{{product.amount}}</font></td>
             <td><font face='montserrat' size='4'>{{product.description}}</font></td>
+            <td>
+                <form method="POST" action="{% url 'main:add_stock' product.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add">
+                    <button type="submit" class="circular-btn add-btn">
+                        <span class="icon">+</span>
+                    </button>
+                </form>
+
+                <form method="POST" action="{% url 'main:add_stock' product.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="reduce">
+                    <button type="submit" class="circular-btn subtract-btn">
+                        <span class="icon">-</span>
+                    </button>
+                </form>
+
+                <form method="POST" action="{% url 'main:delete_product' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="circular-btn delete-btn">
+                        <span class="icon">&#128465;</span>
+                    </button>
+                </form>
+            </td>
         </tr>
     {% endfor %}
 </table>
-
+{% endif %}
 <br />
 
 <div class="container">
     <div class="center">
-        <button class="tombol" ><a class = "hub" href="{% url 'main:create_product' %}">Add New Game</a></button>
+        <button class="add-game-btn"><a class="hub" href="{% url 'main:create_product' %}">Add New Game</a></button>
     </div>
 </div>
+
+<p style="text-align: center;">
+    <b><font size="4" color="black" face="montserrat">Last login session: {{ last_login }}</font></b>
+</p>
 {% endblock content %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Add Game</title>
+{% endblock meta %}
+
+{% block content %}
+<style>
+
+    .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #4aa7f7; 
+    font-family: montserrat;
+    padding: 5px;
+    }
+
+    .login-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px; 
+    width: 100%;
+    font-family: montserrat;
+    margin: 5px;
+    }
+
+    .form-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    font-family: montserrat;
+    }
+
+    label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: montserrat;
+    }
+
+   
+    .submit-btn {
+    background-color: #4aa7f7;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: montserrat;
+    }
+
+    .submit-btn:hover {
+    background-color: #357abf;
+    }
+
+    input {
+    font-family: montserrat;
+    }
+
+</style>
+
+<div class="login-container">
+    <div class="login-box">
+        <h1>Add New Game</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td><label for="{{ form.name.id_for_label }}">Name:</label></td>
+                    <td>{{ form.name }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.amount.id_for_label }}">Amount:</label></td>
+                    <td>{{ form.amount }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.description.id_for_label }}">Description:</label></td>
+                    <td><textarea name="{{ form.description.name }}" id="{{ form.description.id_for_label }}" style="font-family: montserrat;"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Add Game" class="submit-btn">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
