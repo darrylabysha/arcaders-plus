@@ -1,3 +1,93 @@
+TUGAS 5
+
+A. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+
+    1. Universal Selector (*)
+    Digunakan jika ingin mengedit semua elemen dalam dokumen HTML.
+    Contoh:
+    * {
+        font-family: montserrat;
+    }
+
+    2. Element Selector
+    Digunakan jika ingin mengedit semua elemen dengan tipe tertentu seperti <p>, <h1>, <div>, dan lain-lain.
+    p {
+    color: white;
+    }
+
+    3. Class Selector
+    Digunakan jika ingin mengedit elemen berdasarkan atribut class yang sama.
+    .button {
+    border-radius: 4px;
+    }
+
+    4. ID Selector
+    Digunakan jika ingin mengedit elemen berdasarkan atribut id yang unik pada suatu laman.
+    #header {
+    background-color: black;
+    }
+
+    5. Pseudo-class Selector 
+    Digunakan jika ingin mengedit elemen berdasarkan perilaku khusus seperti hover untuk mengarahkan kursor ke atas suatu elemen.
+    .button:hover {
+    background-color: blue;
+    }
+
+B. Jelaskan HTML5 Tag yang kamu ketahui.
+
+    <header>: Bagian atas halaman web.
+    <main>: Konten utama dalam halaman web.
+    <footer>: Bagian bawah halaman web.
+    <form>: Membuat formulir interaktif.
+    <input>: Komponen dalam form untuk menginput data.
+    <button>: Tombol yang dapat tekan oleh user.
+    <title>: Menentukan judul halaman web yang akan ditampilkan di tab browser.
+    <div>: Membuat wadah yang mengelompokkan dan mengatur konten dalam halaman web.
+    <a>: Digunakan untuk membuat link ke halaman web atau sumber lainnya.
+    <img>: Untuk menyisipkan gambar atau grafik ke dalam halaman web.
+    <ul>: Membuat daftar tak terurut (unordered list).
+    <ol>: Membuat daftar terurut (ordered list).
+    <li>: Mengidentifikasi elemen dalam daftar (list item).
+    <p>: Membuat paragraf teks.
+    <h1> hingga <h6>: Menentukan tingkat judul dengan h1 sebagai judul utama dan h6 sebagai judul terkecil.
+    <table>: Membuat tabel data.
+    <tr>: Membuat baris dalam tabel.
+    <td>: Membuat sel dalam tabel.
+    <textarea>: Area teks untuk user memasukkan teks panjang.
+    <label>: Label yang terkait elemen dalam formulir.
+    <span>: Digunakan untuk menerapkan gaya pada teks atau elemen dalam baris teks.
+    <strong> dan <em>: Menggunakan huruf bold dan italic untuk memberikan penekanan.
+    <hr>: Menambahkan garis horizontal sebagai pemisah.
+    <br>: Membuat jeda baris dalam teks.
+    <b>: Mengubah teks menjadi bold.
+    <i>: Mengubah teks menjadi italic.
+
+
+C. Jelaskan perbedaan antara margin dan padding.
+    
+    Margin merupakan ruang kosong yang berada di luar batas elemen dalam desain halaman web. Margin digunakan untuk mengatur jarak antar elemen atau dengan elemen di luarnya. Ini memungkinkan untuk mengubah spasi di sekitar elemen seperti memberikan jarak antara dua blok teks atau memusatkan elemen di tengah halaman. Properti margin dapat memiliki nilai positif untuk menambahkan jarak atau negatif untuk mengurangi jarak dan tidak memiliki latar belakang atau warna.
+
+    Sedangkan, padding merupakan ruang kosong yang berada di antara batas dalam elemen dan kontennya. Padding digunakan untuk mengatur jarak antara tepi elemen dan konten atau isi elemen tersebut, sehingga memengaruhi tampilan konten dalam elemen seperti memberikan ruang tambahan di sekitar teks atau gambar di dalam elemen. Padding memiliki latar belakang dan dapat memiliki warna atau gambar sebagai latar belakang konten, dan hanya memiliki nilai positif. Ketika digunakan bersama dengan margin, padding memungkinkan desain web untuk lebih dikendalikan tata letak dan tampilan elemennya secara lebih detail.
+
+D. Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+
+    Tailwind CSS merupakan framework CSS yang memiliki pendekatan "utility-first". Dalam Tailwind, user dapat membangun tampilan dengan menggabungkan kelas-kelas utilitas yang telah didefinisikan sebelumnya dalam CSS. Hal terseabut memberikan fleksibilitas dan memungkinkan kontrol detail dari tampilan yang sangat rinci sehingga membuat Tailwind cocok untuk proyek yang memerlukan tampilan yang sangat kustom. Tailwind juga dapat menghasilkan CSS yang lebih ringan karena hanya mengeluarkan gaya yang digunakan dalam proyek user sehingga dapat mengoptimalkan kinerja halaman web.
+
+    Sedangkan, Bootstrap adalah framework CSS dengan komponen-komponen desain yang siap pakai atau "preset", sehingga memungkinkan user untuk membangun tampilan dengan cepat menggunakan komponen-komponen seperti tombol, form, dan navigasi yang telah disiapkan sebelumnya dari template Bootstrap. Bootstrap lebih cocok untuk pengembangan cepat atau prototyping sehingga memungkinkan user untuk membuat tampilan dengan sedikit usaha desain. Namun karena Bootstrap memiliki styling bawaan/template yang kuat, Bootstrap bisa menjadi kurang fleksibel untuk merancang tampilan yang sangat kustom.
+
+    Pilihan antara Tailwind CSS dan Bootstrap tergantung pada kebutuhan. Jika yang dperlukan adalah fleksibilitas tinggi dan kontrol atas tampilan, user dapat menggunakan Tailwind. Sebaliknya, jika yang diperlukan adalah membangun tampilan dengan cepat dan memanfaatkan komponen-komponen siap pakai, maka user dapat menggunakan Bootstrap untuk mempercepat proses pembuatan proyek.
+
+E. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    1. Pertama-tama, saya mereview kembali apa yang saya pelajari dari tutorial-tutorial sebelumnya.
+    2. Lalu setelah selesai tutorial kemarin saya langsung mencoba untuk mengimplementasikan Bootstrap dalam aplikasi web saya namun ternyata banyak yang overlap dengan styling CSS yang sudah saya buat, sehingga perlu saya sesuaikan lagi.
+    3. Sebelum menyesuaikan styling, saya membuat halaman edit product untuk dapat mengedit product-product yang sudah diinput oleh user.
+    4. Kemudian, saya mulai mengedit satu-satu halaman yang terefek oleh Bootstrap agar lebih sesuai dengan desain yang ingin saya implementasikan.
+    5. Saya menggunakan campuran Bootstrap dan CSS, dengan adanya desain base yang lebih rapi dari Bootstrap dan juga elemen-elemen khusus yang sudah saya buat dari CSS seperti buttons lain lain-lain.
+    6. Namun karena sizing agak berbeda di Bootstrap, segala macam padding dan margin perlu saya sesuaikan lagi juga dengan mengedit atribut class template Bootstrap.
+    7. Saya juga memastikan agar template Bootstrap tidak melebihi style custom CSS yang sudah saya buat dengan mengedit base.html.
+    8. Kemudian saya mengedit tampilan main.html agar menggunakan card untuk setiap product sehingga tampilan lebih rapi dan menambahkan footer dibawah yang dapat mengedit product-product yang sudah dibuat.
+    9. Terakhir, saya juga mengedit register page agar tidak terlalu mengikuti template UserCreationForm agar lebih rapi juga, namun beberapa validasi masih salah sehingga perlu ditinjau kembali lagi.
+
 TUGAS 4
 
  A. Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?

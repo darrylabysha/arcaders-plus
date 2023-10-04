@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Edit Product</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 my-auto text-center">
+            <div class="card mx-auto"> 
+
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-white"><b>Edit Product</b></h1>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <table class="mx-auto"> 
+                                {{ form.as_table }}
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input type="submit" value="Edit Product" class="custom-login-btn">
+                                        <a href="{% url 'main:show_main' %}" class="custom-logout-btn">Back</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    body {
+        background-color: #a6cced;
+    }
+
+    .card-header {
+        background-color: #07579d;
+    }
+
+    .card {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    body, h1, label, textarea, button, a {
+        font-family: montserrat;
+    }
+</style>
+{% endblock %}

@@ -5,93 +5,74 @@
 {% endblock meta %}
 
 {% block content %}
-<style>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 my-auto">
+            <div class="card mx-auto">
 
-    .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #4aa7f7; 
-    font-family: montserrat;
-    padding: 5px;
-    }
-
-    .login-box {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 400px; 
-    width: 100%;
-    font-family: montserrat;
-    margin: 5px;
-    }
-
-    .form-container h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-    font-family: montserrat;
-    }
-
-    label {
-    display: block;
-    margin-bottom: 10px;
-    font-family: montserrat;
-    }
-
-   
-    .submit-btn {
-    background-color: #4aa7f7;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-family: montserrat;
-    }
-
-    .submit-btn:hover {
-    background-color: #357abf;
-    }
-
-    input {
-    font-family: montserrat;
-    }
-
-</style>
-
-<div class="login-container">
-    <div class="login-box">
-        <h1>Add New Game</h1>
-
-        <form method="POST">
-            {% csrf_token %}
-            <table>
-                <tr>
-                    <td><label for="{{ form.name.id_for_label }}">Name:</label></td>
-                    <td>{{ form.name }}</td>
-                </tr>
-                <tr>
-                    <td><label for="{{ form.amount.id_for_label }}">Amount:</label></td>
-                    <td>{{ form.amount }}</td>
-                </tr>
-                <tr>
-                    <td><label for="{{ form.description.id_for_label }}">Description:</label></td>
-                    <td><textarea name="{{ form.description.name }}" id="{{ form.description.id_for_label }}" style="font-family: montserrat;"></textarea></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" value="Add Game" class="submit-btn">
-                    </td>
-                </tr>
-            </table>
-        </form>
+            <div class="card">
+                <div class="card-header">
+                    <div class="text-center">
+                        <h1 class="card-title"><b>Add New Game</b></h1>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="text-center">
+                            <div class="mb-3">
+                                <label for="{{ form.name.id_for_label }}" class="form-label"><b>Name: </b></label>
+                                {{ form.name }}
+                            </div>
+                        
+                            <div class="mb-3">
+                                <label for="{{ form.amount.id_for_label }}" class="form-label"><b>Amount: </b></label>
+                                {{ form.amount }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.description.id_for_label }}" class="form-label"><b>Description:</b></label>
+                            <textarea name="{{ form.description.name }}" id="{{ form.description.id_for_label }}" class="form-control"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="custom-login-btn">Add Game</button>
+                            <a href="{% url 'main:show_main' %}" class="custom-logout-btn">Back</a>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+
+    body {
+        background-color: #a6cced;
+
+    
+    }
+    .card-header {
+        background-color: #07579d;
+    }
+
+    .card{
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h1 {
+        color: white;
+    }
+    
+    body, h1, label, textarea, button, a {
+        font-family: montserrat;
+    }
+    .form-control {
+        border-radius: 8px;
+    }
+</style>
 
 {% endblock %}

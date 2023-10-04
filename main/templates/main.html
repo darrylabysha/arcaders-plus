@@ -6,70 +6,69 @@
 
 {% block content %}
 
-<div class="top-bar">
+<div class="top-bar mt-3 mx-3">
     <div class="top-bar-left">
+        <!--<h1><b>Welcome</b></h1>-->
         <div class="logo">
-            <h1 class="arcaders-text">Arcaders+</h1>
+            <h1 class="arcaders-text"><b>Arcaders+</b></h1>
         </div>
     </div>
     <div class="top-bar-right">
         <div class="user-info">
-            <p><font size='4' face='montserrat'><b>Administrator:</b></font> {{ name }}</p>
-            <p><font size='4' face='montserrat'><b>Class:</b></font> {{ class }}</p>
+            <p><font size='4' face='montserrat'><b>Administrator:</b> {{ name }}</font></p>
+            <p><font size='4' face='montserrat'><b>Class:</b> {{ class }}</font></p>
         </div>
         <div class="logout">
-            <a href="{% url 'main:logout' %}" class="logout-btn">Logout</a>
+            <a href="{% url 'main:logout' %}" class="custom-logout-btn">Logout</a>
         </div>
     </div>
 </div>
 
-
 {% if products %}
-    <p><font size='4' color='black' face='montserrat'>There {{ verb }} currently {{ num_products }} kind{{ pluralize }} of game{{ pluralize }} in stock.</font></p>
+<br>
+<h2 class="text-center"><font size='6' color='black' face='montserrat'>There {{ verb }} currently <b>{{ num_products }}</b> kind{{ pluralize }} of game{{ pluralize }} in stock.</font></h2>
+<br>
+    <div class="row justify-content-center">
+        {% for product in products %}
+        <div class="col-md-3 mb-5 mx-5">
+            <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><b>{{ product.name }}</b></h2>
+                        <p class="card-text">{{ product.description }}</p>
+                        <h4 class="card-text"><strong>Stock:</strong> {{ product.amount }}</h4>
+                    </div>
+                    <div class="card-footer d-flex justify-content-end custom-card-footer">
+                        <form method="POST" action="{% url 'main:add_stock' product.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="add">
+                            <button type="submit" class="circular-btn add-btn">
+                                <span class="icon"><b>+</b></span>
+                            </button>
+                        </form>
+                        
+                        <form method="POST" action="{% url 'main:add_stock' product.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="reduce">
+                            <button type="submit" class="circular-btn subtract-btn">
+                                <span class="icon"><b>-</b></span>
+                            </button>
+                        </form>
 
-
-<table align='center' cellpadding='10' cellspacing='10' bgcolor='#4aa7f7'>
-    <tr align='center'>
-        <th><font face='montserrat' size='4'><b>Title</b></font></th>
-        <th><font face='montserrat' size='4'><b>Stock</b></font></th>
-        <th><font face='montserrat' size='4'><b>Description</b></font></th>
-        <th><font face='montserrat' size='4'><b>Actions</b></font></th>
-    </tr>
-
-    {% for product in products %}
-        <tr align='center'>
-            <td><font face='montserrat' size='4'>{{product.name}}</font></td>
-            <td><font face='montserrat' size='4'>{{product.amount}}</font></td>
-            <td><font face='montserrat' size='4'>{{product.description}}</font></td>
-            <td>
-                <form method="POST" action="{% url 'main:add_stock' product.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="add">
-                    <button type="submit" class="circular-btn add-btn">
-                        <span class="icon">+</span>
-                    </button>
-                </form>
-
-                <form method="POST" action="{% url 'main:add_stock' product.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="reduce">
-                    <button type="submit" class="circular-btn subtract-btn">
-                        <span class="icon">-</span>
-                    </button>
-                </form>
-
-                <form method="POST" action="{% url 'main:delete_product' product.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="circular-btn delete-btn">
-                        <span class="icon">&#128465;</span>
-                    </button>
-                </form>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
+                        <form method="POST" action="{% url 'main:delete_product' product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="circular-btn delete-btn">
+                                <span class="icon">&#128465;</span>
+                            </button>
+                        </form>
+                        
+                        <a href="{% url 'main:edit_product' product.pk %}" class="btn btn-info custom-edit-button">Edit</a> <!-- Add custom class -->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endif %}
-<br />
+
 
 <div class="container">
     <div class="center">
@@ -80,4 +79,34 @@
 <p style="text-align: center;">
     <b><font size="4" color="black" face="montserrat">Last login session: {{ last_login }}</font></b>
 </p>
+
+<style>
+    .custom-card-footer {
+        background-color: #81bbee;
+    }
+    .custom-edit-button {
+
+        background-color: #0a7de0;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border: 2px solid #000;
+    }
+
+    .custom-edit-button:hover {
+        background-color: #357abf;
+        border: 2px solid #000;
+    }
+    body {
+        background-color: whitesmoke;
+    
+    }
+    .card{
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
 {% endblock content %}

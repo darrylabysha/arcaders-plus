@@ -4,41 +4,102 @@
     <title>Register</title>
 {% endblock meta %}
 
-{% block content %}  
+{% block content %}
 
 <style>
     input, textarea {
-    font-family: montserrat;
+        font-family: montserrat;
+    }
+
+    .login-container-template {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #07579d;
+        font-family: montserrat;
+    }
+
+    .login-box-template {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        font-family: montserrat;
+    }
+
+    .login-box-template h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+        font-family: montserrat;
+    }
+
+    .login-btn {
+        background-color: #4aa7f7;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family: montserrat;
+    }
+
+    .login-btn:hover {
+        background-color: #357abf;
+    }
+
+    ul {
+        list-style: none;
+        color: red;
+        margin-top: 10px;
+        font-family: montserrat;
+    }
+    body {
+        background-color: whitesmoke;
+    
     }
 </style>
+<div class="login-container-template">
+    <div class="login-box-template">
+        <h2><b>Welcome to Arcaders+</b></h2>
+        <h1>Please register here!</h1>
+        <form method="POST">
+            {% csrf_token %}
 
-<div class="login-container">
-    
-    <div class="login-box">
-        <h1>Register</h1>  
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}"><b>Username:</b></label>
+                <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" class="form-control" required>
+            </div>
 
-        <form method="POST">  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}
-                <tr>  
-                    <td></td>
-                    <td>
-                        <input type="submit" name="submit" value="Register" class="login-btn" />
-                    </td>  
-                </tr>  
-            </table>  
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}"><b>Password:</b></label>
+                <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}"><b>Confirm Password:</b></label>
+                <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}" class="form-control" required>
+            </div>
+
+            <input type="submit" name="submit" value="Register" class="custom-login-btn" />
+            
+            <a href="{% url 'main:login' %}" class="custom-logout-btn">Back</a>
+
         </form>
 
-        {% if messages %}  
-            <ul>   
-                {% for message in messages %}  
-                    <li>{{ message }}</li>  
-                {% endfor %}  
-            </ul>   
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
         {% endif %}
     </div>
+</div>
 
-</div>  
 
 {% endblock content %}
