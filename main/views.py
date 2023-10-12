@@ -22,7 +22,9 @@ from .forms import RegistrationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth import password_validation
-
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseNotFound
+from django.http import JsonResponse
 
 
 
@@ -42,9 +44,7 @@ def show_main(request):
         'num_products': num_products,
         'verb': verb,
         'pluralize': pluralize,
-        #'last_login': request.COOKIES['last_login'],
-        'last_login': last_login,  # Use 'last_login' if it exists, otherwise 'N/A'
-
+        'last_login': last_login,
     }
 
     return render(request, "main.html", context)
@@ -98,11 +98,9 @@ class CustomRegistrationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Customize form fields or add additional fields here if needed.
 
     def clean_password1(self):
         password1 = self.cleaned_data.get("password1")
-        # Add custom password validation logic here.
         if len(password1) < 8:
             raise forms.ValidationError("Your password must contain at least 8 characters.")
         return password1
@@ -119,17 +117,16 @@ class CustomRegistrationForm(UserCreationForm):
 
 def register(request):
     if request.method == "POST":
-        form = RegistrationForm(request.POST)
+        form = CustomRegistrationForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            confirm_password = form.cleaned_data['confirm_password']
+            password = form.cleaned_data['password1']
+            confirm_password = form.cleaned_data['password2']
 
             if password != confirm_password:
                 messages.error(request, "Passwords do not match.")
                 return redirect('main:register')
 
-            # Custom password validations
             if len(password) < 8:
                 messages.error(request, "Your password must contain at least 8 characters.")
                 return redirect('main:register')
@@ -219,3 +216,70 @@ def edit_product(request, id):
 
     context = {'form': form}
     return render(request, "edit_product.html", context)
+
+def get_product_json(request):
+    product_item = Product.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        genre = request.POST.get("genre")  
+        amount = request.POST.get("amount")   
+        description = request.POST.get("description")
+        user = request.user
+
+        new_product = Product(name=name, genre=genre, amount=amount, description=description, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+@csrf_exempt
+def add_stock_ajax(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action == "add":
+            product.amount += 1
+        elif action == "reduce":
+            if product.amount > 0:
+                product.amount -= 1
+        product.save()
+
+        return JsonResponse({"status": "success", "amount": product.amount})
+    else:
+        return JsonResponse({"status": "error"})
+
+@csrf_exempt
+def delete_product_ajax(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    if request.method == "POST":
+        product.delete()
+        num_products = Product.objects.count()
+        return JsonResponse({'num_products': num_products, "status": "success"})
+    else:
+        return JsonResponse({"status": "error"})
+    
+@csrf_exempt
+def edit_product_ajax(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    if request.method == "POST":
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"status": "success"})
+        else:
+            return JsonResponse({"status": "error"})
+    else:
+        return JsonResponse({"status": "error"})
+
+def get_product_count(request):
+    count = Product.objects.filter(user=request.user).count()
+    return JsonResponse({'num_products': count})
+

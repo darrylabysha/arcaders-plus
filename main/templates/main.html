@@ -1,23 +1,29 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block meta %}
+<head>
     <title>Arcaders+</title>
+    <link rel="icon" href="{% static 'arcaders_logo.png' %}">
+</head>
 {% endblock meta %}
 
 {% block content %}
 
 <div class="top-bar mt-3 mx-3">
     <div class="top-bar-left">
-        <!--<h1><b>Welcome</b></h1>-->
+        
         <div class="logo">
-            <h1 class="arcaders-text"><b>Arcaders+</b></h1>
+            <img src="{% static 'longlogo.png' %}" width='650' height=auto>
         </div>
     </div>
     <div class="top-bar-right">
         <div class="user-info">
-            <p><font size='4' face='montserrat'><b>Administrator:</b> {{ name }}</font></p>
-            <p><font size='4' face='montserrat'><b>Class:</b> {{ class }}</font></p>
+            <p><font size='5' face='montserrat'><b>Administrator:</b> {{ name }}</font></p>
+            <p><font size='5' face='montserrat'><b>Class:</b> {{ class }}</font></p>
         </div>
+        <br>
         <div class="logout">
             <a href="{% url 'main:logout' %}" class="custom-logout-btn">Logout</a>
         </div>
@@ -26,53 +32,66 @@
 
 {% if products %}
 <br>
-<h2 class="text-center"><font size='6' color='black' face='montserrat'>There {{ verb }} currently <b>{{ num_products }}</b> kind{{ pluralize }} of game{{ pluralize }} in stock.</font></h2>
+<!--
+<h2 class="text-center" id="game-count"><font size='6' color='black' face='montserrat'>There {{ verb }} currently <b>{{ num_products }}</b> kind{{ pluralize }} of game{{ pluralize }} in stock.</font></h2>
+-->
+<div id = "game-count" class="text-center">
+    <font size='6' color='black' face='montserrat'>
+        There {{ verb }} currently <b>{{ num_products }}</b> kind{{ pluralize }} of game{{ pluralize }} in stock.
+    </font>
+</div>
 <br>
-    <div class="row justify-content-center">
-        {% for product in products %}
-        <div class="col-md-3 mb-5 mx-5">
-            <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title"><b>{{ product.name }}</b></h2>
-                        <p class="card-text">{{ product.description }}</p>
-                        <h4 class="card-text"><strong>Stock:</strong> {{ product.amount }}</h4>
-                    </div>
-                    <div class="card-footer d-flex justify-content-end custom-card-footer">
-                        <form method="POST" action="{% url 'main:add_stock' product.id %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="action" value="add">
-                            <button type="submit" class="circular-btn add-btn">
-                                <span class="icon"><b>+</b></span>
-                            </button>
-                        </form>
-                        
-                        <form method="POST" action="{% url 'main:add_stock' product.id %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="action" value="reduce">
-                            <button type="submit" class="circular-btn subtract-btn">
-                                <span class="icon"><b>-</b></span>
-                            </button>
-                        </form>
-
-                        <form method="POST" action="{% url 'main:delete_product' product.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="circular-btn delete-btn">
-                                <span class="icon">&#128465;</span>
-                            </button>
-                        </form>
-                        
-                        <a href="{% url 'main:edit_product' product.pk %}" class="btn btn-info custom-edit-button">Edit</a> <!-- Add custom class -->
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+<div id = "product_cards" class="row justify-content-center">
+    
+</div>
 {% endif %}
 
 
 <div class="container">
     <div class="center">
         <button class="add-game-btn"><a class="hub" href="{% url 'main:create_product' %}">Add New Game</a></button>
+    </div>
+</div>
+
+<div class="modal fade" id="addGameModal" tabindex="-1" aria-labelledby="addGameModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addGameModalLabel">Add New Game</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label"><b>Title</b>:</label>
+                        <input type="text" class="form-control" id="name" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label"><b>Genre</b>:</label>
+                        <input type="text" class="form-control" id="genre" name="genre"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label"><b>Amount:</b></label>
+                        <input type="number" class="form-control" id="amount" name="amount"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label"><b>Description:</b></label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="custom-logout-btn" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="custom-login-btn" id="button_add" data-bs-dismiss="modal"><font face="montserrat">Add Game</font></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="center">
+        <button type="button" class="ajax-game-btn" data-bs-toggle="modal" data-bs-target="#addGameModal"><b>Add New Game by AJAX</b></button>
     </div>
 </div>
 
@@ -102,11 +121,207 @@
     }
     body {
         background-color: whitesmoke;
-    
     }
     .card{
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
+
+    .transparent-button {
+        background: transparent; 
+        border: none; 
+        padding: 5px 10px;
+        margin: 0 5px; 
+        cursor: pointer; 
+        position: absolute; 
+        left: 0; 
+    }
+
+    .ajax-game-btn {
+        background-color: #00C2CB;
+        color: #fff;
+        padding: 15px 30px; 
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family: montserrat;
+        font-size: 30px; 
+        }
+
+        .ajax-game-btn:hover {
+        background-color: #179EA4;
+        transition: box-shadow 0.3s;
+        box-shadow: 0px 0px 10px #179EA4;
+        }
+
 </style>
+
+<script>
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+
+    async function refreshProducts() {
+            const products = await getProducts();
+            document.getElementById("product_cards").innerHTML = "";
+            let htmlString = "";
+
+            products.forEach((item) => {
+                htmlString += `
+                <div class="col-md-3 mb-5 mx-5">
+                        <div class="card" id="product-${item.pk}">
+                            <div class="card-body">
+                                <h2 class="card-title"><b>${item.fields.name}</b></h2>
+                                <div id="card-details-${item.pk}" class="card-details" style="display: none;">
+                                    <h5 class="card-text"><strong>Genre:</strong> <span class="stock-genre">${item.fields.genre}</span></h5>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <br>
+                                </div>
+                                <h4 class="card-text"><strong>Stock:</strong> <span class="stock-amount">${item.fields.amount}</span></h4>
+                            </div>
+                            <div class="card-footer d-flex justify-content-end custom-card-footer">
+                                <button class="transparent-button" onclick="toggleCardDetails(${item.pk})">
+                                    <img src="{% static 'dropdown.png' %}" width='30' height='auto'>
+                                </button>
+                                <form onsubmit="return false;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="add">
+                                    <button type="button" class="circular-btn add-btn" onclick="addStock(${item.pk}, 'add')">
+                                        <span class="icon"><b>+</b></span>
+                                    </button>
+                                </form>
+                                <form onsubmit="return false;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="reduce">
+                                    <button type="button" class="circular-btn subtract-btn" onclick="addStock(${item.pk}, 'reduce')">
+                                        <span class="icon"><b>-</b></span>
+                                    </button>
+                                </form>
+
+                                <button onclick="deleteProduct(${item.pk})" class="circular-btn delete-btn">
+                                    <span class="icon">&#128465;</span>
+                                </button>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById("product_cards").innerHTML = htmlString;
+        }
+
+        refreshProducts();
+        
+        function addProduct() {
+            fetch("{% url 'main:add_product_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return Promise.all([refreshProducts(), updateProductCount()]);
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then(() => {
+                // Reset the form
+                document.getElementById('form').reset();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+            return false;
+        }
+
+        document.getElementById('button_add').onclick = addProduct;
+
+    function addStock(product_id, action) {
+        fetch(`/add_stock_ajax/${product_id}/`, {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: new URLSearchParams({ action }),
+        })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Network response was not ok");
+            }
+        })
+        .then((data) => {
+            const stockElement = document.querySelector(`#product-${product_id} .stock-amount`);
+            if (stockElement) {
+                stockElement.textContent = data.amount;
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+    }
+
+    function toggleCardDetails(cardId) {
+        const cardDetails = document.querySelector(`#card-details-${cardId}`);
+        if (cardDetails.style.display === "none" || cardDetails.style.display === "") {
+            cardDetails.style.display = "block";
+        } else {
+            cardDetails.style.display = "none";
+        }
+    }
+
+    async function deleteProduct(product_id) {
+        const response = await fetch(`/delete_product_ajax/${product_id}/`, {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data.status === "success") {
+                const productElement = document.getElementById(`product-${product_id}`);
+                if (productElement) {
+                    productElement.remove();
+                    updateProductCount();
+                }
+            }
+        }
+    }
+
+    async function updateProductCount() {
+        try {
+            const response = await fetch("{% url 'main:get_product_count' %}");
+            if (response.ok) {
+                const data = await response.json();
+                const gameCountElement = document.getElementById("game-count");
+                if (gameCountElement) {
+                    const { num_products } = data;
+                    const verb = num_products === 1 ? "is" : "are";
+                    const pluralize = num_products === 1 ? "" : "s";
+                    gameCountElement.innerHTML = `
+                    <font size='6' color='black' face='montserrat'>
+                        There ${verb} currently <b>${num_products}</b> kind${pluralize} of game${pluralize} in stock.
+                    </font>
+                    `;
+                }
+            }
+        } catch (error) {
+            console.error("Error updating product count:", error);
+        }
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+</script>
 
 {% endblock content %}

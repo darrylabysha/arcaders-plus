@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block meta %}
+<head>
     <title>Add Game</title>
+    <link rel="icon" href="{% static 'arcaders_logo.png' %}">
+</head>
 {% endblock meta %}
 
 {% block content %}
@@ -24,6 +29,10 @@
                             <div class="mb-3">
                                 <label for="{{ form.name.id_for_label }}" class="form-label"><b>Name: </b></label>
                                 {{ form.name }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="{{ form.genre.id_for_label }}" class="form-label"><b>Genre: </b></label>
+                                {{ form.genre }}
                             </div>
                         
                             <div class="mb-3">

@@ -1,3 +1,46 @@
+TUGAS 6
+
+    A. Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+
+        Pada synchronous programming, operasi atau perintah dieksekusi secara berurutan, dimana kode berikutnya hanya akan dijalankan setelah kode sebelumnya selesai dieksekusi. Sehingga, hal tersebut dapat mengakibatkan perlambatan dalam aplikasi, terutama jika ada operasi yang memerlukan waktu lama untuk selesai.
+
+        Sedangkan pada synchronous programming, operasi dapat mulai dan dibiarkan berjalan di latar belakang sementara kode lain tetap berjalan. Ketika operasi asinkron selesai, program akan menerima pemberitahuan dan dapat melanjutkan operasi tersebut, sehingga berguna untuk berbagai task yang tidak memerlukan pemblokiran eksekusi program, seperti permintaan jaringan.
+
+    B. Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+    
+        Paradigma Event-Driven Programming adalah pendekatan dalam pemrograman dimana aplikasi merespons suatu peristiwa seperti tindakan pengguna, contohnya mengklik mouse atau menekan keyboard, dan lain-lain. Aplikasi yang menggunakan paradigma ini merespons peristiwa secara asinkron yaitu dengan menunggu dan merespons peristiwa ketika terjadi tanpa harus menjalankan baris kode secara berurutan. Dalam konteks JavaScript dan AJAX, penerapannya memungkinkan pembuatan halaman web yang interaktif yang merespons tindakan pengguna, seperti mengklik tombol, sehingga memungkinkan pengembangan antarmuka pengguna yang responsif tanpa memerlukan pembaruan halaman.
+
+    C. Jelaskan penerapan asynchronous programming pada AJAX.
+    
+        AJAX (Asynchronous JavaScript And XML) menerapkan pemrograman asinkron. Ketika kita mengirim permintaan AJAX, tidak perlu menunggu suatu respons sehingga kode lain dapat tetap berjalan. Ketika respons diterima, sebuah fungsi callback dipanggil. Sehingga hal tersebut memungkinkan halaman web untuk mengirim permintaan ke server, menerima data baru, dan memperbarui tampilan tanpa harus me-reload keseluruhan halaman.
+
+    D. Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+
+        1. Kompleksitas:
+
+            Fetch API: Lebih rinci dan memerlukan pemahaman tentang Promise, namun memberikan kontrol yang lebih besar.
+            jQuery: Lebih sederhana dan menyederhanakan banyak detail dalam library.
+
+        2. Ukuran:
+            Fetch API: Lebih ringan dan berukuran lebih kecil sehingga cocok untuk kinerja tinggi.
+            jQuery: Lebih besar dan dapat memperbesar ukuran halaman web sehingga perlu diperhatikan dalam efisiensi pemuatan halaman.
+            
+        3. Fleksibilitas:
+            Fetch API: Lebih fleksibel, mendukung teknologi terbaru, dan memungkinkan pengembangan aplikasi kompleks.
+            jQuery: Cocok untuk pengembangan web sederhana tanpa perlu mendalam dalam detail teknis, meskipun bisa kurang sesuai untuk kasus kompleks.
+
+    E. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+        1. Pertama-tama, saya review kembali yang sudah diajarkan dalam tutorial 5 kemarin.
+        2. Saya menambahkan fungsi-fungsi baru pada views.py untuk dapat mengambil dan menambahkan item dengan AJAX.
+        3. Lalu, saya edit file main dengan menambahkan file-file javascript untuk mendukung implementasi AJAX tersebut.
+        4. Lalu, saya mengedit fungsi refreshProducts agar mengupdate tipe cards sesuai dengan apa yang sudah saya buat sebelumnya.
+        5. Setelah itu, saya juga membuat fungsi-fungsi baru untuk menambahkan, mengurangi, dan juga delete item menggunakan AJAX juga.
+        6. Saya juga menambahkan 1 variabel product baru bernama genre agar lebih lengkap.
+        7. Karena itu, saya menambahkan suatu dropdown menu untuk setiap card untuk melihat description dan juga genre dari game yang sudah ditambah.
+        8. Saya juga mengupdate counter dari game agar menggunakan AJAX juga dan tidak perlu menunggu refresh dari web.
+        9. Terakhir, saya menambahkan file-file yang diperlukan agar web dapat di deploy.
+
+
 TUGAS 5
 
 A. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.

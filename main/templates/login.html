@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 
-{% block meta %}
-    <title>Login</title>
-    <style>
+{% load static %}
 
-        body {
-            background-color: #4aa7f7;
-        
-        }
-    </style>
+{% block meta %}
+<head>
+    <title>Login to Arcaders+</title>
+    <link rel="icon" href="{% static 'arcaders_logo.png' %}">
+</head>
+
+<style>
+
+    body {
+        background-color: #4aa7f7;
+    
+    }
+</style>
+
 {% endblock meta %}
 
 {% block content %}

@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block meta %}
-    <title>Register</title>
+<head>
+    <title>Register new account</title>
+    <link rel="icon" href="{% static 'arcaders_logo.png' %}">
+</head>
 {% endblock meta %}
 
 {% block content %}
@@ -61,6 +66,17 @@
         background-color: whitesmoke;
     
     }
+    .error-box {
+        background-color: #f8d7da; 
+        border: 1px solid #d73d4a; 
+        padding: 10px;           
+        border-radius: 5px;   
+        margin: 10px;            
+        text-align: center;    
+        font-weight: bold;  
+        color: #721c24;      
+        padding-right: 70px;  
+    }
 </style>
 <div class="login-container-template">
     <div class="login-box-template">
@@ -91,14 +107,19 @@
         </form>
 
 
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+        
     </div>
+    <div>
+            {% if form.errors %}
+                <div class="error-box">
+                    <ul>
+                        <li style="font-weight: bold;">
+                            {{ form.errors }}
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
 </div>
 
 

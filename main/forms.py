@@ -6,7 +6,7 @@ from django import forms
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = ["name", "amount", "description"]
+        fields = ["name", "genre", "amount", "description"]
 
 class RegistrationForm(forms.Form):
     username = forms.CharField(max_length=150)
