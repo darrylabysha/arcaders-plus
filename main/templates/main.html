@@ -5,7 +5,7 @@
 {% block meta %}
 <head>
     <title>Arcaders+</title>
-    <link rel="icon" href="{% static 'arcaders_logo.png' %}">
+    <link rel="icon" href="https://i.ibb.co/nsWY9yc/arcaders-logo.png">
 </head>
 {% endblock meta %}
 
@@ -15,7 +15,7 @@
     <div class="top-bar-left">
         
         <div class="logo">
-            <img src="{% static 'longlogo.png' %}" width='650' height=auto>
+            <img src="https://i.ibb.co/DffZTsh/longlogo.png" width='650' height=auto>
         </div>
     </div>
     <div class="top-bar-right">
@@ -30,7 +30,7 @@
     </div>
 </div>
 
-{% if products %}
+
 <br>
 <!--
 <h2 class="text-center" id="game-count"><font size='6' color='black' face='montserrat'>There {{ verb }} currently <b>{{ num_products }}</b> kind{{ pluralize }} of game{{ pluralize }} in stock.</font></h2>
@@ -44,7 +44,7 @@
 <div id = "product_cards" class="row justify-content-center">
     
 </div>
-{% endif %}
+
 
 
 <div class="container">
@@ -181,7 +181,7 @@
                             </div>
                             <div class="card-footer d-flex justify-content-end custom-card-footer">
                                 <button class="transparent-button" onclick="toggleCardDetails(${item.pk})">
-                                    <img src="{% static 'dropdown.png' %}" width='30' height='auto'>
+                                    <img src="https://i.ibb.co/C6yG98j/dropdown.png" width='30' height='auto'>
                                 </button>
                                 <form onsubmit="return false;">
                                     {% csrf_token %}
@@ -227,7 +227,6 @@
                 }
             })
             .then(() => {
-                // Reset the form
                 document.getElementById('form').reset();
             })
             .catch((error) => {
@@ -238,6 +237,7 @@
         }
 
         document.getElementById('button_add').onclick = addProduct;
+
 
     function addStock(product_id, action) {
         fetch(`/add_stock_ajax/${product_id}/`, {

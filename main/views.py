@@ -32,8 +32,15 @@ from django.http import JsonResponse
 def show_main(request):
     products = Product.objects.filter(user=request.user)
     num_products = len(products)
-    verb = "are" if num_products > 1 else "is"
-    pluralize = "s" if num_products > 1 else ""
+    if num_products > 1:
+        verb = "are"
+        pluralize = "s"
+    elif num_products == 1:
+        verb = "is"
+        pluralize = ""
+    else:
+        verb = "are"
+        pluralize = "s"
 
     last_login = request.COOKIES.get('last_login', 'N/A')
 
@@ -101,9 +108,15 @@ class CustomRegistrationForm(UserCreationForm):
 
     def clean_password1(self):
         password1 = self.cleaned_data.get("password1")
+        username = self.cleaned_data.get("username")
+
+        if password1 and username:
+            if password1.lower().find(username.lower()) != -1:
+                raise forms.ValidationError("Your password is too similar to your username.")
+
         if len(password1) < 8:
             raise forms.ValidationError("Your password must contain at least 8 characters.")
-        return password1
+        return ""
 
     def clean(self):
         cleaned_data = super().clean()
@@ -111,7 +124,7 @@ class CustomRegistrationForm(UserCreationForm):
         password2 = cleaned_data.get("password2")
 
         if password1 and password2 and password1 != password2:
-            self.add_error("password2", "Passwords do not match.")
+            self.add_error("Passwords do not match.")
 
         return cleaned_data
 
